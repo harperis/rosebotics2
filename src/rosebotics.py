@@ -54,7 +54,7 @@ class Snatch3rRobot(object):
 class DriveSystem(object):
     """
     A class for driving (moving) the robot.
-    Primary authors:  entire team plus PUT_YOUR_NAME_HERE.
+    Primary authors:  entire team plus Russel Staples.
     """
 
     def __init__(self,
@@ -105,9 +105,19 @@ class DriveSystem(object):
         Go straight at the given speed (-100 to 100, negative is backwards)
         for the given number of inches, stopping with the given StopAction.
         """
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-degrees-spun to robot-inches-moved.
-        # TODO:   Assume that the conversion is linear with respect to speed.
+        # DONE: Do a few experiments to determine the constant that converts
+        # DONE:   from wheel-degrees-spun to robot-inches-moved.
+        # DONE:   Assume that the conversion is linear with respect to speed.
+        # 1 inch = 120 degs
+
+        while True:
+            self.start_moving(duty_cycle_percent, duty_cycle_percent)
+            if self.left_wheel.get_degrees_spun() >= inches * 120:
+                break
+        self.stop_moving(stop_action)
+
+
+
 
     def spin_in_place_degrees(self,
                               degrees,
