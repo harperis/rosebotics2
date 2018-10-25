@@ -109,7 +109,7 @@ class DriveSystem(object):
         # DONE:   from wheel-degrees-spun to robot-inches-moved.
         # DONE:   Assume that the conversion is linear with respect to speed.
         # 1 inch = 120 degs
-
+        self.left_wheel.reset_degrees_spun()
         while True:
             self.start_moving(duty_cycle_percent, duty_cycle_percent)
             if self.left_wheel.get_degrees_spun() >= inches * 120:
