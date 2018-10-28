@@ -96,7 +96,7 @@ class DriveSystem(object):
             if time.time() - start_time > seconds:
                 self.stop_moving(stop_action)
                 break
-
+ 
     def go_straight_inches(self,
                            inches,
                            duty_cycle_percent=100,
