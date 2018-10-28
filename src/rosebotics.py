@@ -141,7 +141,8 @@ class DriveSystem(object):
                 self.start_moving(duty_cycle_percent, -duty_cycle_percent)
                 if self.left_wheel.get_degrees_spun() >= degrees*5.2:
                     break
-        self.start_moving(stop_action)
+        self.stop_moving(stop_action)
+
     def turn_degrees(self,
                      degrees,
                      duty_cycle_percent=100,
