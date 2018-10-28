@@ -8,14 +8,16 @@ import time
 
 
 def main():
-    test_color(1)
+    test_color(6)
     """ Runs YOUR specific part of the project """
 
 
 def test_color(color):
     robot = rb.Snatch3rRobot()
-    robot.color_sensor.wait_until_color_is(color)
-    print('True')
+    if not robot.color_sensor.get_color() == color:
+        robot.drive_system.start_moving()
+        robot.color_sensor.wait_until_color_is(color)
+        robot.drive_system.stop_moving()
 
 
 main()
