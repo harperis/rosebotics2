@@ -237,7 +237,11 @@ class ColorSensor(rb.ColorSensor):
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
-        # TODO.
+        # DONE.
+        while True:
+            time.sleep(2)
+            if self.get_reflected_intensity() < reflected_light_intensity:
+                break
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
@@ -245,7 +249,11 @@ class ColorSensor(rb.ColorSensor):
         light intensity is greater than the given value (threshold), which
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
-        # TODO.
+        # DONE.
+        while True:
+            time.sleep(2)
+            if self.get_reflected_intensity() > reflected_light_intensity:
+                break
 
     def wait_until_color_is(self, color):
         """
