@@ -109,10 +109,10 @@ class DriveSystem(object):
         # DONE:   from wheel-degrees-spun to robot-inches-moved.
         # DONE:   Assume that the conversion is linear with respect to speed.
         # 1 inch = 120 degs
-
+        self.left_wheel.reset_degrees_spun()
         while True:
             self.start_moving(duty_cycle_percent, duty_cycle_percent)
-            if self.left_wheel.get_degrees_spun() >= inches * 120:
+            if self.left_wheel.get_degrees_spun() >= inches * 85:
                 break
         self.stop_moving(stop_action)
 
@@ -129,6 +129,19 @@ class DriveSystem(object):
         # TODO: Do a few experiments to determine the constant that converts
         # TODO:   from wheel-degrees-spun to robot-degrees-spun.
         # TODO:   Assume that the conversion is linear with respect to speed.
+        self.left_wheel.reset_degrees_spun()
+        self.right_wheel.reset_degrees_spun()
+        if degrees < 0:
+            while True:
+                self.start_moving(-duty_cycle_percent, duty_cycle_percent)
+                if self.right_wheel.get_degrees_spun() >= degrees*-5.2:
+                    break
+        if degrees > 0:
+            while True:
+                self.start_moving(duty_cycle_percent, -duty_cycle_percent)
+                if self.left_wheel.get_degrees_spun() >= degrees*5.2:
+                    break
+        self.start_moving(stop_action)
     def turn_degrees(self,
                      degrees,
                      duty_cycle_percent=100,
@@ -142,6 +155,19 @@ class DriveSystem(object):
         # TODO: Do a few experiments to determine the constant that converts
         # TODO:   from wheel-degrees-spun to robot-degrees-turned.
         # TODO:   Assume that the conversion is linear with respect to speed.
+        self.left_wheel.reset_degrees_spun()
+        self.right_wheel.reset_degrees_spun()
+        if degrees < 0:
+            while True:
+                self.start_moving(0, duty_cycle_percent)
+                if self.right_wheel.get_degrees_spun() >= degrees*-13.3:
+                    break
+        if degrees > 0:
+            while True:
+                self.start_moving(duty_cycle_percent, 0)
+                if self.left_wheel.get_degrees_spun() >= degrees*13.3:
+                    break
+        self.stop_moving(stop_action)
 
 
 class ArmAndClaw(object):
@@ -205,6 +231,7 @@ class ColorSensor(rb.ColorSensor):
 
     def wait_until_intensity_is_less_than(self, reflected_light_intensity):
         while True:
+            time.sleep(2)
             if self.get_reflected_intensity() < reflected_light_intensity:
                 break
             self.get_reflected_intensity()
@@ -217,9 +244,9 @@ class ColorSensor(rb.ColorSensor):
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         while True:
+            time.sleep(2)
             if self.get_reflected_intensity() > reflected_light_intensity:
                 break
-            self.get_reflected_intensity()
         """
         Waits (doing nothing new) until the sensor's measurement of reflected
         light intensity is greater than the given value (threshold), which
@@ -229,9 +256,9 @@ class ColorSensor(rb.ColorSensor):
 
     def wait_until_color_is(self, color):
         while True:
+            time.sleep(2)
             if self.get_color() == color:
                 break
-
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is the given color.
@@ -241,8 +268,10 @@ class ColorSensor(rb.ColorSensor):
 
     def wait_until_color_is_one_of(self, colors):
         while True:
-            if self.get_color() == colors:
-                break
+            time.sleep(2)
+            for k in range(len(colors)):
+                if self.get_color() == colors[k]:
+                    break
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is any one of the given sequence of colors.
