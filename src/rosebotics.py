@@ -267,11 +267,14 @@ class ColorSensor(rb.ColorSensor):
         # TODO.
 
     def wait_until_color_is_one_of(self, colors):
+        s = 0
         while True:
             time.sleep(2)
             for k in range(len(colors)):
                 if self.get_color() == colors[k]:
-                    break
+                    s = 1
+            if s == 1:
+                break
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is any one of the given sequence of colors.
@@ -289,5 +292,6 @@ class InfraredSensorAsProximitySensor(object):
 class InfraredSensorAsBeaconSensor(object):
     """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
 
+
 class InfraredSensorAsBeaconButtonSensor(object):
-    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
+    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """\
