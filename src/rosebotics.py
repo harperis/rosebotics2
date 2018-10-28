@@ -129,20 +129,6 @@ class DriveSystem(object):
         # DONE: Do a few experiments to determine the constant that converts
         # DONE:   from wheel-degrees-spun to robot-degrees-spun.
         # DONE:   Assume that the conversion is linear with respect to speed.
-        self.left_wheel.reset_degrees_spun()
-        self.right_wheel.reset_degrees_spun()
-        if degrees < 0:
-            while True:
-                self.start_moving(-duty_cycle_percent, duty_cycle_percent)
-                if self.right_wheel.get_degrees_spun() >= degrees*-5.2:
-                    break
-        if degrees > 0:
-            while True:
-                self.start_moving(duty_cycle_percent, -duty_cycle_percent)
-                if self.left_wheel.get_degrees_spun() >= degrees*5.2:
-                    break
-        self.stop_moving(stop_action)
-
     def turn_degrees(self,
                      degrees,
                      duty_cycle_percent=100,
@@ -176,7 +162,6 @@ class ArmAndClaw(object):
         self.motor = ev3.MediumMotor(port)
         self.touch_sensor = touch_sensor
         self.calibrate()  # Sets the motor's position to 0 at the DOWN position.
-
 
     def calibrate(self):
         """
@@ -242,7 +227,7 @@ class ColorSensor(rb.ColorSensor):
             time.sleep(2)
             if self.get_reflected_intensity() < reflected_light_intensity:
                 break
- 
+
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
         Waits (doing nothing new) until the sensor's measurement of reflected
@@ -261,7 +246,11 @@ class ColorSensor(rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
-        # TODO.
+        # DONE.
+        while True:
+            time.sleep(2)
+            if self.get_color() == color:
+                break
 
     def wait_until_color_is_one_of(self, colors):
         """
@@ -269,7 +258,11 @@ class ColorSensor(rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+        # DONE.
+        while True:
+            time.sleep(2)
+            if self.get_color() == colors:
+                break
 
 
 class InfraredSensorAsProximitySensor(object):
