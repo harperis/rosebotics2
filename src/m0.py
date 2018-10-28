@@ -48,7 +48,6 @@ def run_test_touch_sensor():
 def run_test_color_sensor():
     """ Tests the  color_sensor  of the Snatch3rRobot. """
     robot = rb.Snatch3rRobot()
-    robot.color_sensor.wait_until_intensity_is_greater_than(60)
     print()
     print("Testing the  color_sensor  of the robot.")
     print("Repeatedly move the robot to different surfaces.")
