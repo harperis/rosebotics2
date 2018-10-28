@@ -8,9 +8,24 @@ import time
 
 
 def main():
+    drive_until_color(1)
     """ Runs YOUR specific part of the project """
-    testing_intensity(10)
-def testing_intensity(n):
+
+
+def drive_until_color(color):
+    print('start')
+    robot = rb.Snatch3rRobot()
+    if not robot.color_sensor.get_color() == color:
+        while True:
+            robot.drive_system.go_straight_inches(1)
+            break
+        robot.drive_system.stop_moving()
+    print('end')
+
+
+
+
+
 
 
 
