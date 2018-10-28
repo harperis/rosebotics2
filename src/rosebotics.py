@@ -235,7 +235,6 @@ class ColorSensor(rb.ColorSensor):
             time.sleep(2)
             if self.get_reflected_intensity() < reflected_light_intensity:
                 break
-            self.get_reflected_intensity()
         """
         Waits (doing nothing new) until the sensor's measurement of reflected
         light intensity is less than the given value (threshold), which should
