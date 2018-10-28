@@ -239,7 +239,7 @@ class ColorSensor(rb.ColorSensor):
             time.sleep(2)
             if self.get_reflected_intensity() > reflected_light_intensity:
                 break
-
+ 
     def wait_until_color_is(self, color):
         """
         Waits (doing nothing new) until the sensor's measurement
