@@ -8,19 +8,30 @@ import time
 
 
 def main():
-    drive_until_color(1)
+    # drive_until_color(1)
+    test_color(1)
     """ Runs YOUR specific part of the project """
 
 
-def drive_until_color(color):
-    print('start')
+# def drive_until_color(color):
+    # print('start')
+    # robot = rb.Snatch3rRobot()
+    # if not robot.color_sensor.get_color() == color:
+        # while True:
+            # robot.drive_system.go_straight_inches(1)
+            # break
+        # robot.drive_system.stop_moving()
+    # print('end')
+
+
+def test_color(color):
     robot = rb.Snatch3rRobot()
-    if not robot.color_sensor.get_color() == color:
-        while True:
-            robot.drive_system.go_straight_inches(1)
-            break
+    if robot.color_sensor.get_color() == color:
         robot.drive_system.stop_moving()
-    print('end')
+        print('True')
+    else:
+        robot.drive_system.move_for_seconds(1)
+        print('False')
 
 
 
