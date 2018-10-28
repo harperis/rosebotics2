@@ -17,48 +17,18 @@ def main():
 def run_tests():
     """ Runs various tests. """
     run_test_drive_system()
-    run_test_touch_sensor()
-    run_test_color_sensor()
+#   run_test_touch_sensor()
+#   run_test_color_sensor()
 
 
 def run_test_drive_system():
     """ Tests the  drive_system  of the Snatch3rRobot. """
     robot = rb.Snatch3rRobot()
-
-    print()
-    print("Testing the  drive_system  of the robot.")
-    print("Move at (20, 50) - that is, veer left slowly")
-    robot.drive_system.start_moving(20, 50)
-    time.sleep(2)
-    robot.drive_system.stop_moving()
-
-    print("Left/right wheel positions:",
-          robot.drive_system.left_wheel.get_degrees_spun(),
-          robot.drive_system.right_wheel.get_degrees_spun())
-
-    time.sleep(1)
-    print()
-    print("Spin clockwise at half speed for 2.5 seconds")
-    robot.drive_system.move_for_seconds(2.5, 50, -50)
-
-    print("Left/right wheel positions:",
-          robot.drive_system.left_wheel.get_degrees_spun(),
-          robot.drive_system.right_wheel.get_degrees_spun())
-
-    robot.drive_system.left_wheel.reset_degrees_spun()
-    robot.drive_system.right_wheel.reset_degrees_spun(2000)
-
-    time.sleep(1)
-    print()
-    print("Move forward at full speed for 1.5 seconds, coast to stop")
-    robot.drive_system.start_moving()
-    time.sleep(1.5)
-    robot.drive_system.stop_moving(rb.StopAction.COAST)
-
-    print("Left/right wheel positions:",
-          robot.drive_system.left_wheel.get_degrees_spun(),
-          robot.drive_system.right_wheel.get_degrees_spun())
-
+    print('start')
+    robot.drive_system.turn_degrees(-90)
+    robot.drive_system.go_straight_inches(12)
+    robot.drive_system.spin_in_place_degrees(180)
+    print('end')
 
 def run_test_touch_sensor():
     """ Tests the  touch_sensor  of the Snatch3rRobot. """
@@ -97,6 +67,7 @@ def run_test_color_sensor():
               "{:4}".format(robot.color_sensor.get_reflected_intensity()))
         time.sleep(0.5)
         count = count + 1
+
 
 
 main()

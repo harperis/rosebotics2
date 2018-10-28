@@ -9,6 +9,9 @@ import time
 
 def main():
     """ Runs YOUR specific part of the project """
+    polygon
 
 
+def polygon(n):
+    robot = rb.Snatch3rRobot()
 main()
