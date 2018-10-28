@@ -14,21 +14,8 @@ def main():
 
 def test_color(color):
     robot = rb.Snatch3rRobot()
-    if not robot.color_sensor.get_color() == color:
-        while True:
-            robot.drive_system.start_moving()
-            print('False')
-            if robot.color_sensor.get_color() == color:
-                break
-            robot.drive_system.stop_moving()
-            print('True')
-
-
-
-
-
-
-
+    robot.color_sensor.wait_until_color_is(color)
+    print('True')
 
 
 main()

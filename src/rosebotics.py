@@ -256,7 +256,7 @@ class ColorSensor(rb.ColorSensor):
 
     def wait_until_color_is(self, color):
         while True:
-            time.sleep(2)
+            time.sleep(0.1)
             if self.get_color() == color:
                 break
         """
