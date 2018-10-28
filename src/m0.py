@@ -25,9 +25,7 @@ def run_test_drive_system():
     """ Tests the  drive_system  of the Snatch3rRobot. """
     robot = rb.Snatch3rRobot()
     print('start')
-    robot.drive_system.turn_degrees(-90)
-    robot.drive_system.go_straight_inches(12)
-    robot.drive_system.spin_in_place_degrees(180)
+    robot.drive_system.spin_in_place_degrees(360)
     print('end')
 
 def run_test_touch_sensor():

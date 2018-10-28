@@ -96,7 +96,7 @@ class DriveSystem(object):
             if time.time() - start_time > seconds:
                 self.stop_moving(stop_action)
                 break
- 
+
     def go_straight_inches(self,
                            inches,
                            duty_cycle_percent=100,
@@ -134,12 +134,12 @@ class DriveSystem(object):
         if degrees < 0:
             while True:
                 self.start_moving(-duty_cycle_percent, duty_cycle_percent)
-                if self.right_wheel.get_degrees_spun() >= degrees*-5.9:
+                if self.right_wheel.get_degrees_spun() >= degrees*-5.2:
                     break
         if degrees > 0:
             while True:
                 self.start_moving(duty_cycle_percent, -duty_cycle_percent)
-                if self.left_wheel.get_degrees_spun() >= degrees*5.9:
+                if self.left_wheel.get_degrees_spun() >= degrees*5.2:
                     break
         self.stop_moving(stop_action)
 
