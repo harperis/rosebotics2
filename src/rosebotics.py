@@ -126,9 +126,9 @@ class DriveSystem(object):
         where positive is clockwise and negative is counter-clockwise),
         stopping by using the given StopAction.
         """
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-degrees-spun to robot-degrees-spun.
-        # TODO:   Assume that the conversion is linear with respect to speed.
+        # Done: Do a few experiments to determine the constant that converts
+        # Done:   from wheel-degrees-spun to robot-degrees-spun.
+        # Done:   Assume that the conversion is linear with respect to speed.
         self.left_wheel.reset_degrees_spun()
         self.right_wheel.reset_degrees_spun()
         if degrees < 0:
@@ -153,9 +153,9 @@ class DriveSystem(object):
         where positive is clockwise and negative is counter-clockwise),
         stopping by using the given StopAction.
         """
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-degrees-spun to robot-degrees-turned.
-        # TODO:   Assume that the conversion is linear with respect to speed.
+        # Done: Do a few experiments to determine the constant that converts
+        # Done:   from wheel-degrees-spun to robot-degrees-turned.
+        # Done:   Assume that the conversion is linear with respect to speed.
         self.left_wheel.reset_degrees_spun()
         self.right_wheel.reset_degrees_spun()
         if degrees < 0:
@@ -240,7 +240,7 @@ class ColorSensor(rb.ColorSensor):
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
-        # TODO.
+        # Done.
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         while True:
@@ -252,7 +252,7 @@ class ColorSensor(rb.ColorSensor):
         light intensity is greater than the given value (threshold), which
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
-        # TODO.
+        # Done.
 
     def wait_until_color_is(self, color):
         while True:
@@ -264,7 +264,7 @@ class ColorSensor(rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
-        # TODO.
+        # Done.
 
     def wait_until_color_is_one_of(self, colors):
         s = 0
@@ -280,7 +280,7 @@ class ColorSensor(rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+        # DOne.
 
 
 class InfraredSensorAsProximitySensor(object):

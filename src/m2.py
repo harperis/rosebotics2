@@ -1,5 +1,5 @@
 """
-  Capstone Project.  Code written by Isaac Harper.
+  Capstone Project.  Code written by Isaac Harper and Russel Staple.
   Fall term, 2018-2019.
 """
 
