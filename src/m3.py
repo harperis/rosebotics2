@@ -15,6 +15,8 @@ def main():
 def beep_when_sees_hand():
     robot = rb.Snatch3rRobot()
     while True:
-        robot.camera.
+        inches = robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+        print(inches)
+
 
 main()
