@@ -216,6 +216,12 @@ class DriveSystem(object):
         # TODO:   Assume that the conversion is linear with respect to speed.
         # TODO: Don't forget that the Wheel object's position begins wherever
         # TODO:   it last was, not necessarily 0.
+        self.left_wheel.reset_degrees_spun()
+        while True:
+            self.start_moving(duty_cycle_percent, duty_cycle_percent)
+            if self.left_wheel.get_degrees_spun() >= inches * 85:
+                break
+        self.stop_moving(stop_action)
 
     def spin_in_place_degrees(self,
                               degrees,
@@ -235,6 +241,19 @@ class DriveSystem(object):
         # TODO:   Assume that the conversion is linear with respect to speed.
         # TODO: Don't forget that the Wheel object's position begins wherever
         # TODO:   it last was, not necessarily 0.
+        self.left_wheel.reset_degrees_spun()
+        self.right_wheel.reset_degrees_spun()
+        if degrees < 0:
+            while True:
+                self.start_moving(-duty_cycle_percent, duty_cycle_percent)
+                if self.right_wheel.get_degrees_spun() >= degrees * -5.2:
+                    break
+        if degrees > 0:
+            while True:
+                self.start_moving(duty_cycle_percent, -duty_cycle_percent)
+                if self.left_wheel.get_degrees_spun() >= degrees * 5.2:
+                    break
+        self.stop_moving(stop_action)
 
     def turn_degrees(self,
                      degrees,
@@ -254,6 +273,19 @@ class DriveSystem(object):
         # TODO:   Assume that the conversion is linear with respect to speed.
         # TODO: Don't forget that the Wheel object's position begins wherever
         # TODO:   it last was, not necessarily 0.
+        self.left_wheel.reset_degrees_spun()
+        self.right_wheel.reset_degrees_spun()
+        if degrees < 0:
+            while True:
+                self.start_moving(0, duty_cycle_percent)
+                if self.right_wheel.get_degrees_spun() >= degrees * -13.3:
+                    break
+        if degrees > 0:
+            while True:
+                self.start_moving(duty_cycle_percent, 0)
+                if self.left_wheel.get_degrees_spun() >= degrees * 13.3:
+                    break
+        self.stop_moving(stop_action)
 
 
 class TouchSensor(low_level_rb.TouchSensor):
@@ -327,6 +359,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         return super().blue()
 
     def wait_until_intensity_is_less_than(self, reflected_light_intensity):
+        while True:
+            time.sleep(2)
+            if self.get_reflected_intensity() < reflected_light_intensity:
+                break
         """
         Waits (doing nothing new) until the sensor's measurement of reflected
         light intensity is less than the given value (threshold), which should
@@ -335,6 +371,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         # TODO.
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
+        while True:
+            time.sleep(2)
+            if self.get_reflected_intensity() > reflected_light_intensity:
+                break
         """
         Waits (doing nothing new) until the sensor's measurement of reflected
         light intensity is greater than the given value (threshold), which
@@ -343,6 +383,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         # TODO.
 
     def wait_until_color_is(self, color):
+        while True:
+            time.sleep(0.1)
+            if self.get_color() == color:
+                break
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is the given color.
@@ -351,6 +395,14 @@ class ColorSensor(low_level_rb.ColorSensor):
         # TODO.
 
     def wait_until_color_is_one_of(self, colors):
+        s = 0
+        while True:
+            time.sleep(2)
+            for k in range(len(colors)):
+                if self.get_color() == colors[k]:
+                    s = 1
+            if s == 1:
+                break
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is any one of the given sequence of colors.
