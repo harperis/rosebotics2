@@ -9,9 +9,12 @@ import time
 
 def main():
     """ Runs YOUR specific part of the project """
+    beep_when_sees_hand()
+
 
 def beep_when_sees_hand():
-    robot = rb.
-
+    robot = rb.Snatch3rRobot()
+    while True:
+        robot.camera.
 
 main()
