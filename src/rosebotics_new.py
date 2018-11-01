@@ -221,7 +221,7 @@ class DriveSystem(object):
             self.start_moving(duty_cycle_percent, duty_cycle_percent)
             if self.left_wheel.get_degrees_spun() >= inches * 85:
                 break
-        self.stop_moving(stop_action)
+        self.stop_moving(str(stop_action))
 
     def spin_in_place_degrees(self,
                               degrees,
@@ -253,7 +253,7 @@ class DriveSystem(object):
                 self.start_moving(duty_cycle_percent, -duty_cycle_percent)
                 if self.left_wheel.get_degrees_spun() >= degrees * 5.2:
                     break
-        self.stop_moving(stop_action)
+        self.stop_moving(str(stop_action))
 
     def turn_degrees(self,
                      degrees,
@@ -285,7 +285,7 @@ class DriveSystem(object):
                 self.start_moving(duty_cycle_percent, 0)
                 if self.left_wheel.get_degrees_spun() >= degrees * 13.3:
                     break
-        self.stop_moving(stop_action)
+        self.stop_moving(str(stop_action))
 
 
 class TouchSensor(low_level_rb.TouchSensor):
@@ -702,9 +702,9 @@ class ArmAndClaw(object):
     """
     A class for the arm and its associated claw.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+    their colleagues, the entire team, and Russel Staples.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self, touch_sensor, port=ev3.OUTPUT_A):
         # The ArmAndClaw's  motor  is not really a Wheel, of course,
@@ -726,7 +726,18 @@ class ArmAndClaw(object):
         again at a reasonable speed. Then set the motor's position to 0.
         (Hence, 0 means all the way DOWN and 14.2 * 360 means all the way UP).
         """
-        # TODO: Do this as STEP 2 of implementing this class.
+        # DONE: Do this as STEP 2 of implementing this class.
+        self.motor.reset_degrees_spun()
+        self.motor.start_spinning(70)
+        while True:
+            if self.touch_sensor.is_pressed() == True:
+                break
+        self.motor.stop_spinning()
+        self.motor.start_spinning(-70)
+        while True:
+            if self.motor.get_degrees_spun() <= -14.2*360:
+                break
+        self.motor.stop_spinning()
 
     def raise_arm_and_close_claw(self):
         """
@@ -735,8 +746,12 @@ class ArmAndClaw(object):
         Positive speeds make the arm go UP; negative speeds make it go DOWN.
         Stop when the touch sensor is pressed.
         """
-        # TODO: Do this as STEP 1 of implementing this class.
-
+        # DONE: Do this as STEP 1 of implementing this class.
+        self.motor.start_spinning(70)
+        while True:
+            if self.touch_sensor.is_pressed() == True:
+                break
+        self.motor.stop_spinning()
     def move_arm_to_position(self, position):
         """
         Spin the arm's motor until it reaches the given position.

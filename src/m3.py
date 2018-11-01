@@ -11,7 +11,7 @@ def main():
     """ Runs YOUR specific part of the project """
 
 def beep_when_sees_hand():
-    robot = rb.
+    robot = rb.Snatch3rRobot
 
 
 main()

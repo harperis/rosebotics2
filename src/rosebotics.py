@@ -280,7 +280,7 @@ class ColorSensor(rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # DOne.
+        # Done.
 
 
 class InfraredSensorAsProximitySensor(object):
