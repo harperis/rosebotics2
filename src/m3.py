@@ -3,6 +3,8 @@
   Fall term, 2018-2019.
 """
 
+from ev3dev import ev3
+from enum import Enum
 import rosebotics_new as rb
 import time
 
