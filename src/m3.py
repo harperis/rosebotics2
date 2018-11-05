@@ -20,6 +20,6 @@ def beep_when_sees_hand():
         inches = robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
         print(inches)
 
-
+s
 
 main()
