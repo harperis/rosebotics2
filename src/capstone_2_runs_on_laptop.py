@@ -8,7 +8,7 @@ It uses MQTT to SEND information to a program running on the ROBOT.
 Authors:  David Mutchler, his colleagues, and Isaac Harper.
 """
 # ------------------------------------------------------------------------------
-# TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.  Then delete this TODO.
+# Done: 1. PUT YOUR NAME IN THE ABOVE LINE.  Then delete this Done.
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
