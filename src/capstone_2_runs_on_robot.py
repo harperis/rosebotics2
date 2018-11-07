@@ -27,15 +27,16 @@ import ev3dev.ev3 as ev3
 
 def main():
     # --------------------------------------------------------------------------
-    # TODO: 3. Construct a Snatch3rRobot.  Test.  When OK, delete this TODO.
+    # Done: 3. Construct a Snatch3rRobot.  Test.  When OK, delete this Done.
     # --------------------------------------------------------------------------
     robot = rb.Snatch3rRobot()
     # --------------------------------------------------------------------------
-    # TODO: 4. Add code that constructs a   com.MqttClient   that will
-    # TODO:    be used to receive commands sent by the laptop.
-    # TODO:    Connect it to this robot.  Test.  When OK, delete this TODO.
+    # Done: 4. Add code that constructs a   com.MqttClient   that will
+    # Done:    be used to receive commands sent by the laptop.
+    # Done:    Connect it to this robot.  Test.  When OK, delete this Done.
     # --------------------------------------------------------------------------
-    mqtt_client = com.MqttClient()
+    rc = RemoteControlEtc(robot)
+    mqtt_client = com.MqttClient(rc)
     mqtt_client.connect_to_pc()
     # --------------------------------------------------------------------------
     # TODO: 5. Add a class for your "delegate" object that will handle messages
@@ -58,6 +59,20 @@ def main():
         # TODO:    Beacon is pressed.  Test.  When done, delete this TODO.
         # ----------------------------------------------------------------------
         time.sleep(0.01)  # For the delegate to do its work
+
+
+class RemoteControlEtc(object):
+    """
+    Stores a Robot.
+      :type robot: rb.Snatch3rRobot
+    """
+    def __init__(self, robot):
+        self.robot = robot
+
+    def go_forward(self, speed_string):
+        speed = int(speed_string)
+        print('Robot should start moving.')
+        self.robot.drive_system.start_moving(speed, speed)
 
 
 main()
