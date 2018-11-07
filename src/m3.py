@@ -8,7 +8,7 @@ from enum import Enum
 import rosebotics_new as rb
 import time
 
-s
+
 def main():
     """ Runs YOUR specific part of the project """
     beep_when_sees_hand()
