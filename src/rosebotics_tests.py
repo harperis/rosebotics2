@@ -19,16 +19,18 @@ def run_tests():
     # run_test_drive_system()
     # run_test_touch_sensor()
     # run_test_color_sensor()
-    # run_test_arm()
+    run_test_arm()
 
 
 def run_test_arm():
     robot = rb.Snatch3rRobot()
     robot.arm.calibrate()
-    #time.sleep(1)
-    #robot.arm.raise_arm_and_close_claw()
-    #time.sleep(1)
-    #robot.arm.move_arm_to_position(300)
+    print(1)
+    time.sleep(1)
+    robot.arm.raise_arm_and_close_claw()
+    print(2)
+    time.sleep(1)
+    robot.arm.move_arm_to_position(300)
 
 
 def run_test_ir():
@@ -46,8 +48,9 @@ def run_test_ir():
         #    beacon_sensor  NOT YET IMPLEMENTED
         #    beacon_button_sensor  NOT YET IMPLEMENTED
         print("Touch sensor:",
-              robot.touch_sensor.get_value(),
-              robot.touch_sensor.is_pressed())
+              robot.beacon_sensor.get_heading_to_beacon(),
+              robot.beacon_sensor.get_distance_to_beacon(),
+              robot.beacon_button_sensor)
 
         character = input(
             "Press the ENTER (return) key to continue, or q to quit: ")
