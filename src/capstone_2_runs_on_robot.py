@@ -53,12 +53,16 @@ def main():
     # --------------------------------------------------------------------------
     while True:
         # ----------------------------------------------------------------------
-        # TODO: 7. Add code that makes the robot beep if the top-red button
-        # TODO:    on the Beacon is pressed.  Add code that makes the robot
-        # TODO:    speak "Hello. How are you?" if the top-blue button on the
-        # TODO:    Beacon is pressed.  Test.  When done, delete this TODO.
+        # Done: 7. Add code that makes the robot beep if the top-red button
+        # Done:    on the Beacon is pressed.  Add code that makes the robot
+        # Done:    speak "Hello. How are you?" if the top-blue button on the
+        # Done:    Beacon is pressed.  Test.  When done, delete this Done.
         # ----------------------------------------------------------------------
         time.sleep(0.01)  # For the delegate to do its work
+        if robot.beacon_button_sensor.is_top_red_button_pressed():
+            ev3.Sound.beep().wait()
+        if robot.beacon_button_sensor.is_top_blue_button_pressed():
+            ev3.Sound.speak("Hello. How are you?").wait()
 
 
 class RemoteControlEtc(object):
