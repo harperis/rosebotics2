@@ -7,7 +7,7 @@ Also: responds to Beacon button-presses by beeping, speaking.
 This module runs on the ROBOT.
 It uses MQTT to RECEIVE information from a program running on the LAPTOP.
 
-Authors:  David Mutchler, his colleagues, and PUT_YOUR_NAME_HERE.
+Authors:  David Mutchler, his colleagues, and Isaac Harper.
 """
 # ------------------------------------------------------------------------------
 # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.  Then delete this TODO.
@@ -29,13 +29,14 @@ def main():
     # --------------------------------------------------------------------------
     # TODO: 3. Construct a Snatch3rRobot.  Test.  When OK, delete this TODO.
     # --------------------------------------------------------------------------
-
+    robot = rb.Snatch3rRobot()
     # --------------------------------------------------------------------------
     # TODO: 4. Add code that constructs a   com.MqttClient   that will
     # TODO:    be used to receive commands sent by the laptop.
     # TODO:    Connect it to this robot.  Test.  When OK, delete this TODO.
     # --------------------------------------------------------------------------
-
+    mqtt_client = com.MqttClient()
+    mqtt_client.connect_to_pc()
     # --------------------------------------------------------------------------
     # TODO: 5. Add a class for your "delegate" object that will handle messages
     # TODO:    sent from the laptop.  Construct an instance of the class and
