@@ -5,14 +5,12 @@
 
 import rosebotics_new as rb
 import time
-import tkinter
-from tkinter import ttk
 
 
 def main():
     """ Runs YOUR specific part of the project """
     polygon(5, 10)
-#   drivegui()
+
 
 # Interior angle formula: (n-2)*180//n
 
