@@ -18,7 +18,7 @@ def beep_when_sees_hand():
     robot = rb.Snatch3rRobot()
     while True:
         inches = robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
-        if inches < 12:
+        if inches < 15:
             print("Beeping:")
             ev3.Sound.beep().wait()
 
