@@ -132,8 +132,8 @@ class Snatch3rRobot(object):
         self.color_sensor = ColorSensor(color_sensor_port)
         self.camera = Camera(camera_port)
 
-        self.proximity_sensor = InfraredAsProximitySensor(ir_sensor_port)
-        self.beacon_sensor = InfraredAsBeaconSensor(channel=1)
+        #self.proximity_sensor = InfraredAsProximitySensor(ir_sensor_port)
+        #self.beacon_sensor = InfraredAsBeaconSensor(channel=1)
         self.beacon_button_sensor = InfraredAsBeaconButtonSensor(channel=1)
 
         self.brick_button_sensor = BrickButtonSensor()
@@ -649,40 +649,6 @@ class InfraredAsBeaconButtonSensor(object):
 
     def is_bottom_blue_button_pressed(self):
         return self._underlying_ir_sensor.blue_down
-
-    def set_channel(self, channel):
-        """
-        Makes this sensor look for signals on the given channel. The physical
-        Beacon has a switch that can set the channel to 1, 2, 3 or 4.
-        """
-        self._underlying_ir_sensor.channel = channel
-
-    def get_channel(self):
-        return self._underlying_ir_sensor.channel
-
-    def get_buttons_pressed(self):
-        """
-        Returns a list of the numbers corresponding to buttons on the Beacon
-        which are currently pressed.
-        """
-        button_list = self._underlying_remote_control.buttons_pressed
-        for k in range(len(button_list)):
-            button_list[k] = self.button_names[button_list[k]]
-
-    def is_top_red_button_pressed(self):
-        return self._underlying_remote_control.red_up
-
-    def is_bottom_red_button_pressed(self):
-        return self._underlying_remote_control.red_down
-
-    def is_top_blue_button_pressed(self):
-        return self._underlying_remote_control.blue_up
-
-    def is_bottom_blue_button_pressed(self):
-        return self._underlying_remote_control.buttons_pressed
-
-    def is_beacon_button_pressed(self):
-        return self._underlying_remote_control.buttons_pressed
 
 
 class BrickButtonSensor(object):

@@ -3,11 +3,12 @@
   Fall term, 2018-2019.
 """
 
-import rosebotics_new as rb
+import rosebotics as rb
 import time
 
 
 def main():
+    #test_color(2)
     follow_line(50)
     """ Runs YOUR specific part of the project """
 
