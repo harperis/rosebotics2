@@ -288,7 +288,6 @@ class ColorSensor(low_level_rb.ColorSensor):
     def __init__(self, port=ev3.INPUT_3):
         super().__init__(port)
 
-
     def get_color(self):
         """
         Returns its best guess as to the color of the object upon which it is
@@ -566,7 +565,6 @@ class InfraredAsBeaconButtonSensor(object):
             "beacon": BEACON_BUTTON
         }
 
-
     def set_channel(self, channel):
         """
         Makes this sensor look for signals on the given channel. The physical
@@ -598,7 +596,6 @@ class InfraredAsBeaconButtonSensor(object):
 
     def is_bottom_blue_button_pressed(self):
         return self._underlying_ir_sensor.blue_down
-
 
 
 class BrickButtonSensor(object):
@@ -671,16 +668,28 @@ class ArmAndClaw(object):
         # Sets the motor's position to 0 (the DOWN position).
         # At the DOWN position, the robot fits in its plastic bin,
         # so we start with the ArmAndClaw in that position.
-        self.calibrate()
+        #self.calibrate()
 
-    def calibrate(self):
+    #def calibrate(self):
         """
         Raise the arm at a reasonable speed until the touch sensor is pressed.
         Then lower the arm 14.2 revolutions (i.e., 14.2 * 360 degrees),
         again at a reasonable speed. Then set the motor's position to 0.
         (Hence, 0 means all the way DOWN and 14.2 * 360 means all the way UP).
         """
-        # TODO: Do this as STEP 2 of implementing this class.
+        # DONE: Do this as STEP 2 of implementing this class.
+        self.motor.start_spinning(70)
+        while True:
+            if self.touch_sensor.is_pressed() == True:
+                break
+        self.motor.stop_spinning()
+        self.motor.reset_degrees_spun(14.2*360)
+        self.motor.start_spinning(-70)
+        while True:
+            if self.motor.get_degrees_spun() <= 0:
+                break
+        self.motor.stop_spinning()
+        self.motor.reset_degrees_spun()
 
     def raise_arm_and_close_claw(self):
         """
@@ -689,11 +698,28 @@ class ArmAndClaw(object):
         Positive speeds make the arm go UP; negative speeds make it go DOWN.
         Stop when the touch sensor is pressed.
         """
-        # TODO: Do this as STEP 1 of implementing this class.
+        # DONE: Do this as STEP 1 of implementing this class.
+        self.motor.start_spinning(70)
+        while True:
+            if self.touch_sensor.is_pressed() == True:
+                break
+        self.motor.stop_spinning()
 
     def move_arm_to_position(self, position):
         """
         Spin the arm's motor until it reaches the given position.
         Move at a reasonable speed.
         """
-        # TODO: Do this as STEP 3 of implementing this class.
+        # DONE: Do this as STEP 3 of implementing this class.
+        if self.motor.get_degrees_spun() >= position:
+            self.motor.start_spinning(-70)
+            while True:
+                if self.motor.get_degrees_spun() <= position:
+                    break
+            self.motor.stop_spinning()
+        if self.motor.get_degrees_spun() <= position:
+            self.motor.start_spinning(70)
+            while True:
+                if self.motor.get_degrees_spun() >= position:
+                    break
+            self.motor.stop_spinning()

@@ -19,7 +19,7 @@ Authors:  David Mutchler, his colleagues, and Isaac Harper.
 # Done:    Once you understand the "big picture", delete this Done.
 # ------------------------------------------------------------------------------
 
-import rosebotics_new as rb
+import rosebotics_even_newer as rb
 import time
 import mqtt_remote_method_calls as com
 import ev3dev.ev3 as ev3
@@ -75,9 +75,31 @@ class RemoteControlEtc(object):
     def __init__(self, robot):
         self.robot = robot
 
-    def go_forward(self, speed_string):
+    def high_five(self):
+        self.robot.drive_system.start_moving(40, 40)
+        while True:
+            inches = self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+            if inches < 70:
+                self.robot.drive_system.stop_moving()
+                print('Speaking')
+                ev3.Sound.set_volume(75)
+                ev3.Sound.speak('High Five Bro?').wait()
+                break
+
+    def too_slow(self):
+        while True:
+            inches = self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+            if inches < 40:
+                speed = -100
+                self.robot.drive_system.move_for_seconds(1, speed, speed)
+                print('Speaking')
+                ev3.Sound.set_volume(75)
+                ev3.Sound.speak('Ha ha, Too Slow Bro!').wait()
+                break
+
+    def stop_moving(self, speed_string):
         speed = int(speed_string)
-        print('Robot should start moving.')
+        print('Robot should stop moving.')
         self.robot.drive_system.start_moving(speed, speed)
 
 

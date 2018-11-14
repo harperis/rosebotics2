@@ -68,45 +68,42 @@ def main():
 
 def setup_gui(root_window, mqtt_client):
     """ Constructs and sets up widgets on the given window. """
-    frame = ttk.Frame(root_window, padding=10)
+    frame = ttk.Frame(root_window, padding=30)
     frame.grid()
 
-    speed_entry_box = ttk.Entry(frame)
-    degree_entry_box = ttk.Entry(frame)
-    go_forward_button = ttk.Button(frame, text="Go forward")
-    go_backward_button = ttk.Button(frame, text="Go backward")
+    high_five_button = ttk.Button(frame, text="Want a High Five")
+    yes_bro_button = ttk.Button(frame, text="Yeah Bro")
+    stop_moving_button = ttk.Button(frame, text="Stop moving")
 
-    speed_entry_box.grid()
-    degree_entry_box.grid()
-    go_forward_button.grid()
-    go_backward_button.grid()
+    high_five_button.grid()
+    yes_bro_button.grid()
+    stop_moving_button.grid()
 
-    go_forward_button['command'] = \
-        lambda: handle_go_forward(speed_entry_box, mqtt_client)
+    high_five_button['command'] = \
+        lambda: high_five(mqtt_client)
 
-    go_backward_button['command'] = \
-        lambda: go_backward(speed_entry_box, mqtt_client)
+    yes_bro_button['command'] = \
+        lambda: yeah_bro(mqtt_client)
 
-
-def handle_go_forward(entry_box, mqtt_client):
-    """
-    Tells the robot to go forward at the speed specified in the given entry box.
-    """
-    distance = entry_box.get()
-    mqtt_client.send_message('go_forward', [distance])
-    print("Sending 'go_forward' to a robot, with a distance", distance)
+    stop_moving_button['command'] = \
+        lambda: stop_moving(mqtt_client)
 
 
-def go_backward(entry_box, mqtt_client):
-    distance = entry_box.get()
-    mqtt_client.send_message('go backward', [distance])
-    print("Sending 'go_backward' to a robot, with a speed", distance)
+def high_five(mqtt_client):
+    mqtt_client.send_message('high_five')
+    print("Sending 'high_five' to a robot")
 
 
-def turn_right(entry_box, mqtt_client):
-    degree = entry_box.get()
-    mqtt_client.send_message('turn right', [degree])
-    print("Sending ' turn_right', to a robot, with a degree", degree)
+def yeah_bro(mqtt_client):
+    mqtt_client.send_message('too_slow')
+    print("Sending 'too_slow' to a robot")
+
+
+def stop_moving(mqtt_client):
+    speed = 0
+    mqtt_client.send_message('stop_moving', [speed])
+    print("Sending 'stop_moving' to a robot", speed)
+
     # --------------------------------------------------------------------------
     # Done: 6. This function needs the entry box in which the user enters
     # Done:    the speed at which the robot should move.  Make the 2 changes
