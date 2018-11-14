@@ -64,20 +64,28 @@ def main():
 
 def setup_gui(root_window):
     """ Constructs and sets up widgets on the given window. """
-    frame = ttk.Frame(root_window, padding=10)
+    frame = ttk.Frame(root_window, padding=50)
     frame.grid()
 
     speed_entry_box = ttk.Entry(frame)
     go_forward_button = ttk.Button(frame, text="Go forward")
+    degree_entry_box = ttk.Entry(frame)
+    degree_button = ttk.Button(frame, text="Turn Degrees")
 
     speed_entry_box.grid()
     go_forward_button.grid()
+    degree_entry_box.grid()
+    degree_button.grid()
 
     go_forward_button['command'] = \
         lambda: handle_go_forward()
+    #degree_button['command'] = \
+    #    lambda: turn_degrees()
 
 
 def handle_go_forward():
+
+#def turn_degrees():
     """
     Tells the robot to go forward at the speed specified in the given entry box.
     """

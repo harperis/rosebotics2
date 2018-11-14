@@ -72,22 +72,41 @@ def setup_gui(root_window, mqtt_client):
     frame.grid()
 
     speed_entry_box = ttk.Entry(frame)
+    degree_entry_box = ttk.Entry(frame)
     go_forward_button = ttk.Button(frame, text="Go forward")
+    go_backward_button = ttk.Button(frame, text="Go backward")
 
     speed_entry_box.grid()
+    degree_entry_box.grid()
     go_forward_button.grid()
+    go_backward_button.grid()
 
     go_forward_button['command'] = \
         lambda: handle_go_forward(speed_entry_box, mqtt_client)
+
+    go_backward_button['command'] = \
+        lambda: go_backward(speed_entry_box, mqtt_client)
 
 
 def handle_go_forward(entry_box, mqtt_client):
     """
     Tells the robot to go forward at the speed specified in the given entry box.
     """
-    speed = entry_box.get()
-    mqtt_client.send_message('go_forward', [speed])
-    print("Sending 'go_forward' to a robot, with a speed", speed)
+    distance = entry_box.get()
+    mqtt_client.send_message('go_forward', [distance])
+    print("Sending 'go_forward' to a robot, with a distance", distance)
+
+
+def go_backward(entry_box, mqtt_client):
+    distance = entry_box.get()
+    mqtt_client.send_message('go backward', [distance])
+    print("Sending 'go_backward' to a robot, with a speed", distance)
+
+
+def turn_right(entry_box, mqtt_client):
+    degree = entry_box.get()
+    mqtt_client.send_message('turn right', [degree])
+    print("Sending ' turn_right', to a robot, with a degree", degree)
     # --------------------------------------------------------------------------
     # Done: 6. This function needs the entry box in which the user enters
     # Done:    the speed at which the robot should move.  Make the 2 changes
